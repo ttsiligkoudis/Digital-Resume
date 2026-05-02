@@ -1,33 +1,36 @@
-let theme = localStorage.getItem('portfolio-theme');
-let themeCSS = document.querySelector("link#theme-css");
+const themeCSS = document.querySelector('link#theme-css');
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = themeToggle ? themeToggle.querySelector('.theme-toggle__icon') : null;
 
-if (theme !== null){
-    if (theme == "light"){
-        themeCSS.href = "styles/light.css";
-        document.getElementById("themeLight").style.background = "#000";
-        document.getElementById("themeLight").style.color = "#fff";
+const ICONS = {
+    light: '☀',
+    dark: '☾'
+};
+
+function applyTheme(theme){
+    if (theme === 'light'){
+        themeCSS.href = 'styles/light.css';
+        if (themeIcon) themeIcon.textContent = ICONS.light;
+        themeToggle?.setAttribute('aria-label', 'Switch to dark theme');
+    } else {
+        themeCSS.href = '';
+        if (themeIcon) themeIcon.textContent = ICONS.dark;
+        themeToggle?.setAttribute('aria-label', 'Switch to light theme');
     }
-}else{
-    themeCSS.href = "";
-    document.getElementById("themeDark").style.background = "#fff";
-    document.getElementById("themeDark").style.color = "#000";
 }
 
-Array.from(document.querySelectorAll('button.themeBtn')).forEach(element => {
-    element.addEventListener('click', (e) => {
-        if (e.target.id == "themeLight"){
-            localStorage.setItem('portfolio-theme', 'light');
-            themeCSS.href = "styles/light.css";
-            document.getElementById("themeLight").style.background = "#000";
-            document.getElementById("themeLight").style.color = "#fff";
-            document.getElementById("themeDark").removeAttribute("style");
-        }
-        if (e.target.id == "themeDark"){
-            localStorage.removeItem('portfolio-theme');
-            themeCSS.href = "";
-            document.getElementById("themeDark").style.background = "#fff";
-            document.getElementById("themeDark").style.color = "#000";
-            document.getElementById("themeLight").removeAttribute("style");
-        }
-    })
-})
+const stored = localStorage.getItem('portfolio-theme');
+applyTheme(stored === 'light' ? 'light' : 'dark');
+
+themeToggle?.addEventListener('click', () => {
+    const current = localStorage.getItem('portfolio-theme') === 'light' ? 'light' : 'dark';
+    const next = current === 'light' ? 'dark' : 'light';
+
+    if (next === 'light'){
+        localStorage.setItem('portfolio-theme', 'light');
+    } else {
+        localStorage.removeItem('portfolio-theme');
+    }
+
+    applyTheme(next);
+});
