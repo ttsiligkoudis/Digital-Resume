@@ -1,229 +1,486 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Themis Tsiligkoudis — Full-Stack .NET Developer</title>
-        <meta name="description" content="Themis Tsiligkoudis — Full-Stack .NET Developer with 5+ years of experience building production web applications, APIs, and reporting solutions.">
-        <meta name="keywords" content="Themis Tsiligkoudis, .NET Developer, ASP.NET, C#, Software Engineer, Full-Stack Developer, Resume, Portfolio">
-        <meta name="author" content="Themis Tsiligkoudis">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta property="og:title" content="Themis Tsiligkoudis — Full-Stack .NET Developer">
-        <meta property="og:description" content="Full-Stack .NET Developer focused on shipping reliable, scalable web applications.">
-        <meta property="og:type" content="profile">
-        <link rel="stylesheet" href="./styles/main.css">
-        <link rel="stylesheet" href="" id="theme-css">
-    </head>
-    <body>
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme" title="Toggle theme">
-            <span class="theme-toggle__icon" aria-hidden="true">◐</span>
-        </button>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <main id="container--main">
+    <title>Themis Tsiligkoudis — Senior Full-Stack .NET Engineer</title>
+    <meta name="description" content="Senior Full-Stack .NET Engineer with 6 years of production experience in C#, ASP.NET Core, Blazor and SQL Server. Based in Kavala, Greece (UTC+2) and open to fully remote roles across the EU, Switzerland and the Nordics. Builder and sole operator of watchario.app.">
+    <meta name="author" content="Themis Tsiligkoudis">
+    <meta name="keywords" content="Themis Tsiligkoudis, Senior .NET Developer, Full-Stack Engineer, C#, ASP.NET Core, Blazor, .NET MAUI, SQL Server, Remote Developer Greece, Remote .NET Engineer Europe">
+    <link rel="canonical" href="https://myportofolio.eu/">
 
-            <header id="wrapper--hero" class="section--page">
-                <img id="profile-pic" src="./assets/images/profile_pic.JPG" alt="Portrait of Themis Tsiligkoudis">
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="Themis Tsiligkoudis">
+    <meta property="og:url" content="https://myportofolio.eu/">
+    <meta property="og:title" content="Themis Tsiligkoudis — Senior Full-Stack .NET Engineer">
+    <meta property="og:description" content="6 years shipping production .NET. Builder and sole operator of watchario.app — a .NET 10 Blazor + MAUI product with a public REST API. Open to fully remote roles across Europe.">
+    <meta property="og:image" content="https://myportofolio.eu/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Themis Tsiligkoudis, Senior Full-Stack .NET Engineer, remote from Kavala, Greece.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Themis Tsiligkoudis — Senior Full-Stack .NET Engineer">
+    <meta name="twitter:description" content="6 years shipping production .NET. Builder and sole operator of watchario.app. Open to fully remote roles across Europe.">
+    <meta name="twitter:image" content="https://myportofolio.eu/assets/images/og-image.png">
+
+    <meta name="theme-color" content="#0b0d0e" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f7f8f9" media="(prefers-color-scheme: light)">
+
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="./assets/images/profile_pic.JPG">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="./styles/main.css">
+
+    <script>
+        /* Resolve the theme before first paint so the page never flashes. */
+        (function () {
+            try {
+                var t = localStorage.getItem('portfolio-theme');
+                if (t === 'light' || t === 'dark') {
+                    document.documentElement.setAttribute('data-theme', t);
+                }
+            } catch (e) { /* Blocked storage — the OS preference decides. */ }
+        })();
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Themis Tsiligkoudis",
+        "givenName": "Themis",
+        "familyName": "Tsiligkoudis",
+        "jobTitle": "Senior Full-Stack .NET Engineer",
+        "email": "mailto:themtsil@gmail.com",
+        "url": "https://myportofolio.eu/",
+        "image": "https://myportofolio.eu/assets/images/profile_pic.JPG",
+        "description": "Senior Full-Stack .NET Engineer with 6 years of production experience in C#, ASP.NET Core, Blazor, .NET MAUI and SQL Server. Builder and sole operator of watchario.app.",
+        "nationality": { "@type": "Country", "name": "Greece" },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Kavala",
+            "addressRegion": "Eastern Macedonia and Thrace",
+            "addressCountry": "GR"
+        },
+        "knowsLanguage": [
+            { "@type": "Language", "name": "Greek", "alternateName": "el" },
+            { "@type": "Language", "name": "English", "alternateName": "en" }
+        ],
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Classter",
+            "url": "https://www.classter.com"
+        },
+        "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "Democritus University of Thrace",
+            "url": "https://duth.gr"
+        },
+        "knowsAbout": [
+            "C#", ".NET", "ASP.NET Core", "Blazor", ".NET MAUI", "SQL Server",
+            "T-SQL", "Entity Framework Core", "REST API design", "OpenAPI",
+            "SignalR", "SQL Server Reporting Services", "Docker", "OAuth 2.0",
+            "Azure DevOps", "Cloudflare Workers", "Fly.io"
+        ],
+        "sameAs": [
+            "https://github.com/ttsiligkoudis",
+            "https://www.linkedin.com/in/ttsiligkoudis/",
+            "https://watchario.app"
+        ],
+        "seeks": {
+            "@type": "Demand",
+            "name": "Fully remote senior .NET engineering roles across the EU, Switzerland, the Nordics and the Netherlands"
+        }
+    }
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <button id="theme-toggle" class="theme-toggle no-print" type="button" aria-label="Toggle color theme" aria-pressed="false" title="Toggle theme">
+        <span class="theme-toggle__icon" aria-hidden="true">☾</span>
+    </button>
+
+    <main id="main">
+        <div id="container--main">
+
+            <header id="wrapper--hero">
+                <img id="profile-pic" src="./assets/images/profile_pic.JPG" width="150" height="150"
+                     alt="Portrait of Themis Tsiligkoudis">
 
                 <div class="hero__content">
-                    <p class="eyebrow">Full-Stack .NET Developer</p>
+                    <p class="eyebrow">Senior Full-Stack .NET Engineer</p>
                     <h1 id="user-name">Themis Tsiligkoudis</h1>
-                    <p id="bio">Full-Stack .NET Developer with 5+ years of experience designing, building, and shipping production web applications. I turn business requirements into reliable software across the entire stack — from REST APIs and SQL databases to responsive front-end interfaces — with a strong focus on code quality, performance, and clean problem-solving.</p>
-                    <p id="email"><a href="mailto:themtsil@gmail.com">themtsil@gmail.com</a></p>
+
+                    <p id="bio">
+                        Six years shipping production .NET — <strong>C#, ASP.NET Core, Blazor and SQL Server</strong> —
+                        on an education platform used by schools and universities, where I own features from
+                        database schema to released UI, and the incidents that follow them.
+                        On my own time I designed, built and now single-handedly operate
+                        <strong>watchario.app</strong>: a .NET 10 product with a public REST API, paying users,
+                        and nobody else on call.
+                    </p>
+
+                    <ul class="availability">
+                        <li class="is-open">Open to fully remote roles</li>
+                        <li>Kavala, Greece · EET (UTC+2)</li>
+                        <li>EU citizen — no sponsorship required</li>
+                        <li>English C2 · Greek native</li>
+                    </ul>
+
+                    <ul class="cta-row">
+                        <li><a class="btn btn--primary print-url" data-url="themtsil@gmail.com" href="mailto:themtsil@gmail.com?subject=Role%20enquiry">Email me</a></li>
+                        <li><a class="btn print-url" data-url="linkedin.com/in/ttsiligkoudis" href="https://www.linkedin.com/in/ttsiligkoudis/" target="_blank" rel="noopener">LinkedIn</a></li>
+                        <li><a class="btn print-url" data-url="github.com/ttsiligkoudis" href="https://github.com/ttsiligkoudis" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a class="btn no-print" href="./assets/Themis-Tsiligkoudis-CV.pdf" target="_blank" rel="noopener">Download CV (PDF)</a></li>
+                    </ul>
                 </div>
             </header>
 
-            <section class="section--page">
-                <nav id="socials--list" aria-label="Social and resume links">
-                    <a href="https://www.linkedin.com/in/ttsiligkoudis/" target="_blank" rel="noopener">LinkedIn</a>
-                    <a href="https://github.com/ttsiligkoudis" target="_blank" rel="noopener">GitHub</a>
-                    <a href="./assets/Resume.pdf" target="_blank" rel="noopener">Download Resume</a>
-                    <a href="./assets/Diploma Supplement.pdf" target="_blank" rel="noopener">Download Diploma</a>
-                </nav>
+            <section class="section--page" aria-label="Career highlights at a glance">
+                <div class="stat-band">
+                    <p class="stat">
+                        <span class="stat__value">6 years</span>
+                        <span class="stat__label">Production C#, .NET and SQL Server</span>
+                    </p>
+                    <p class="stat">
+                        <span class="stat__value">1,300+</span>
+                        <span class="stat__label">Work items delivered · 2,000+ logged engineering hours</span>
+                    </p>
+                    <p class="stat">
+                        <span class="stat__value">3,000+</span>
+                        <span class="stat__label">Customer issues root-caused before joining the core dev team</span>
+                    </p>
+                    <p class="stat">
+                        <span class="stat__value">Solo</span>
+                        <span class="stat__label">Architecture, code, infrastructure and on-call for watchario.app</span>
+                    </p>
+                </div>
+            </section>
+
+            <section class="section--page" id="flagship">
+                <h2>Flagship Project</h2>
+
+                <article class="featured">
+                    <div class="featured__head">
+                        <h3 class="featured__title">Watchario</h3>
+                        <span class="featured__role">Sole engineer · Live in production</span>
+                    </div>
+
+                    <p class="featured__tagline">
+                        A self-hostable media-tracking product that keeps four third-party services in lockstep,
+                        delivered as three client surfaces on one .NET 10 codebase: a Blazor web app, a Stremio
+                        addon, and a cross-browser extension — with an Android build heading to Google Play.
+                    </p>
+
+                    <ul class="featured__points">
+                        <li><strong>Designed the whole system</strong> — ASP.NET Core, Blazor Web (SSR + WebAssembly) and .NET MAUI sharing one component library.</li>
+                        <li><strong>213 REST endpoints</strong> designed, versioned and documented with OpenAPI; the browser extension is built entirely against that public API.</li>
+                        <li><strong>OAuth 2.0 against four providers</strong> — authorization-code, PKCE and password grants — with token refresh and per-provider lazy re-auth.</li>
+                        <li><strong>Concurrent write fan-out</strong> that mirrors every update across linked accounts, normalising status and score between incompatible provider models.</li>
+                        <li><strong>Runs itself</strong> — Docker on Fly.io, SQLite with continuous Litestream replication, a rehearsed restore drill, and three Cloudflare Workers.</li>
+                        <li><strong>Billing and entitlements</strong> through Paddle webhooks, made idempotent so retries and duplicate deliveries cannot double-charge or double-grant.</li>
+                    </ul>
+
+                    <ul class="tags">
+                        <li>.NET 10</li>
+                        <li>ASP.NET Core</li>
+                        <li>Blazor Web</li>
+                        <li>.NET MAUI</li>
+                        <li>SQLite</li>
+                        <li>EF Core</li>
+                        <li>Docker</li>
+                        <li>Fly.io</li>
+                        <li>Litestream</li>
+                        <li>Cloudflare Workers</li>
+                        <li>OAuth 2.0 / PKCE</li>
+                        <li>Web Push</li>
+                        <li>PWA</li>
+                        <li>OpenAPI</li>
+                    </ul>
+
+                    <ul class="cta-row">
+                        <li><a class="btn btn--primary print-url" data-url="myportofolio.eu/watchario.html" href="./watchario.html">Read the engineering case study</a></li>
+                        <li><a class="btn print-url" data-url="watchario.app" href="https://watchario.app" target="_blank" rel="noopener">Live app</a></li>
+                        <li><a class="btn print-url" data-url="github.com/ttsiligkoudis/Watchario" href="https://github.com/ttsiligkoudis/Watchario" target="_blank" rel="noopener">Source</a></li>
+                    </ul>
+                </article>
             </section>
 
             <section class="section--page">
-                <h2>Core Strengths</h2>
+                <h2>What I Bring</h2>
                 <ul id="qualifications--list">
-                    <li>Full-stack web development across front-end and back-end systems.</li>
-                    <li>Designing and consuming REST APIs, with hands-on experience in database modeling.</li>
-                    <li>Strong analytical and debugging skills — comfortable diving into legacy code.</li>
-                    <li>Customer-facing experience that translates user pain points into shipped fixes.</li>
-                    <li>Building business reports and analytics with SQL Server Reporting Services (SSRS).</li>
-                    <li>Collaborative team player with experience in Agile delivery and code reviews.</li>
+                    <li><strong>End-to-end ownership.</strong> I take a feature from schema design through API, UI and deployment — and stay responsible for it once it is live.</li>
+                    <li><strong>Legacy code without drama.</strong> Six years inside a large, long-lived codebase: reading unfamiliar code, isolating root causes, refactoring safely.</li>
+                    <li><strong>API design that survives contact.</strong> REST and OpenAPI, versioning, idempotent webhooks, and clients that respect third-party rate limits.</li>
+                    <li><strong>Production operations.</strong> Containerised deploys, continuous database replication, tested restore procedures, and diagnosing failures under load.</li>
+                    <li><strong>Data and reporting depth.</strong> T-SQL and EF Core, plus 400+ SSRS reports authored against a complex relational model.</li>
+                    <li><strong>Security by default.</strong> OAuth 2.0 and PKCE flows, SSRF-safe handling of user-supplied URLs, and disciplined secret and credential hygiene.</li>
+                    <li><strong>Customer-facing instinct.</strong> 3,000+ support cases taught me to translate vague user reports into reproducible, prioritised engineering work.</li>
+                    <li><strong>Remote-native by practice.</strong> Written-first communication, self-directed delivery, and a side product that proves I can run a system unsupervised.</li>
                 </ul>
             </section>
 
             <section class="section--page">
                 <h2>Tech Stack</h2>
 
-                <div id="wrapper--techstack__items">
-                    <div class="card--techstack"><span>HTML, CSS, JavaScript</span></div>
-                    <div class="card--techstack"><span>C#, VB, C, C++</span></div>
-                    <div class="card--techstack"><span>ASP.NET MVC &amp; Core</span></div>
-                    <div class="card--techstack"><span>ASP.NET Core Blazor</span></div>
-                    <div class="card--techstack"><span>ASP.NET MAUI</span></div>
-                    <div class="card--techstack"><span>REST, OpenAPI / Swagger</span></div>
-                    <div class="card--techstack"><span>GraphQL</span></div>
-                    <div class="card--techstack"><span>SignalR</span></div>
-                    <div class="card--techstack"><span>SQL Server, T-SQL</span></div>
-                    <div class="card--techstack"><span>SSRS Reporting</span></div>
-                    <div class="card--techstack"><span>Azure DevOps, Git</span></div>
-                    <div class="card--techstack"><span>WordPress</span></div>
+                <div class="stack-group">
+                    <p class="stack-group__label">Languages</p>
+                    <ul class="stack-group__items">
+                        <li>C#</li><li>T-SQL</li><li>JavaScript</li><li>HTML</li><li>CSS</li>
+                        <li>VB</li><li>C</li><li>C++</li>
+                    </ul>
+                </div>
+
+                <div class="stack-group">
+                    <p class="stack-group__label">Backend</p>
+                    <ul class="stack-group__items">
+                        <li>ASP.NET Core</li><li>ASP.NET MVC</li><li>Minimal APIs</li>
+                        <li>Entity Framework Core</li><li>REST</li><li>OpenAPI / Swagger</li>
+                        <li>GraphQL</li><li>SignalR</li><li>Background services</li><li>Webhooks</li>
+                    </ul>
+                </div>
+
+                <div class="stack-group">
+                    <p class="stack-group__label">Frontend</p>
+                    <ul class="stack-group__items">
+                        <li>Blazor Web (SSR + WASM)</li><li>Blazor Hybrid</li><li>Razor</li>
+                        <li>.NET MAUI</li><li>Responsive design</li><li>PWA</li>
+                        <li>Web Push</li><li>Accessibility</li><li>Localisation (i18n)</li>
+                    </ul>
+                </div>
+
+                <div class="stack-group">
+                    <p class="stack-group__label">Data</p>
+                    <ul class="stack-group__items">
+                        <li>SQL Server</li><li>SQLite</li><li>Query tuning</li>
+                        <li>Schema design</li><li>SSRS reporting</li><li>Data migrations</li>
+                        <li>Litestream replication</li>
+                    </ul>
+                </div>
+
+                <div class="stack-group">
+                    <p class="stack-group__label">Cloud &amp; DevOps</p>
+                    <ul class="stack-group__items">
+                        <li>Docker</li><li>Fly.io</li><li>GitHub Actions</li>
+                        <li>Azure DevOps</li><li>Cloudflare Workers</li><li>Git</li>
+                        <li>Continuous deployment</li>
+                    </ul>
+                </div>
+
+                <div class="stack-group">
+                    <p class="stack-group__label">Practices</p>
+                    <ul class="stack-group__items">
+                        <li>OAuth 2.0 / PKCE</li><li>Agile &amp; Scrum</li><li>Code review</li>
+                        <li>Technical writing</li><li>Incident response</li><li>Third-party integrations</li>
+                    </ul>
                 </div>
             </section>
 
             <section id="work-history-wrapper" class="section--page">
-                <h2>Work Experience</h2>
+                <h2>Experience</h2>
 
                 <div class="card--work-history">
                     <div class="card__header">
                         <strong>Software Developer · Classter</strong>
-                        <span class="card__date">10/2022 — Present</span>
+                        <span class="card__date">Oct 2022 — Present</span>
                     </div>
-                    <p>Core member of the development team building the company's flagship education-management platform. Deliver new features and resolve production issues across both front-end and back-end on a daily basis.</p>
+                    <p>
+                        Core developer on the company's flagship education-management SaaS — a large, long-lived
+                        ASP.NET codebase serving schools and universities. I deliver features end-to-end and own
+                        production incidents across the full stack.
+                    </p>
                     <ul>
-                        <li>Designed and shipped new features end-to-end using ASP.NET, C#, HTML, CSS, and JavaScript.</li>
-                        <li>Investigated and resolved complex production bugs, reducing recurring incidents.</li>
-                        <li>Refactored legacy modules using modern patterns to improve maintainability and performance.</li>
-                        <li>Closed 1,300+ Azure DevOps work items, accounting for 2,000+ logged engineering hours.</li>
+                        <li>Delivered <strong>1,300+ Azure DevOps work items</strong> — features, backlog items and defects — accounting for <strong>2,000+ logged engineering hours</strong>.</li>
+                        <li>Designed and shipped features across the stack in ASP.NET, C#, JavaScript and T-SQL, from schema change to released UI.</li>
+                        <li>Root-caused and fixed complex production defects spanning application code, stored procedures and third-party integrations.</li>
+                        <li>Refactored legacy modules onto modern patterns, cutting repeat incidents and making the affected areas safe for the rest of the team to change.</li>
+                        <li>Reviewed teammates' pull requests and contributed to technical decisions on new modules.</li>
                     </ul>
                 </div>
 
                 <div class="card--work-history">
                     <div class="card__header">
                         <strong>Software Developer &amp; Technical Support Engineer · Classter</strong>
-                        <span class="card__date">03/2021 — 10/2022</span>
+                        <span class="card__date">Mar 2021 — Oct 2022</span>
                     </div>
-                    <p>Acted as the technical bridge between customers and the development team — resolving configuration issues, debugging real-world scenarios, and turning support insights into actionable backlog items and reports.</p>
+                    <p>
+                        The technical bridge between customers and engineering: reproducing real-world failures,
+                        fixing what I could directly, and turning everything else into precise, actionable backlog items.
+                    </p>
                     <ul>
-                        <li>Resolved 3,000+ customer support cases across configuration, data, and integration issues.</li>
-                        <li>Logged 2,000+ Azure DevOps cases for bugs and product backlog improvements.</li>
-                        <li>Closed 500+ engineering cases covering migrations, data fixes, and report bugs.</li>
-                        <li>Authored 400+ new SSRS reports from scratch and refined 150+ existing ones.</li>
-                        <li>Wrote 250+ T-SQL scripts to address customer issues and custom requirements.</li>
-                        <li>Strong debugging and root-cause analysis skills across complex, multi-layer systems.</li>
-                        <li>Hands-on experience integrating with third-party providers and external APIs.</li>
+                        <li>Resolved <strong>3,000+ customer cases</strong> across configuration, data integrity, reporting and integration issues.</li>
+                        <li>Closed <strong>500+ engineering cases</strong> covering data migrations, corrective scripts and reporting defects.</li>
+                        <li>Authored <strong>400+ SSRS reports</strong> from scratch and reworked 150+ existing ones against a complex relational model.</li>
+                        <li>Wrote <strong>250+ T-SQL scripts</strong> for customer-specific fixes, bulk corrections and custom requirements.</li>
+                        <li>Filed 2,000+ triaged defect and backlog items, each with reproduction steps engineering could act on immediately.</li>
+                        <li>Integrated and debugged third-party providers and external APIs on behalf of customer deployments.</li>
                     </ul>
                 </div>
 
                 <div class="card--work-history">
                     <div class="card__header">
-                        <strong>Conscript Soldier — IT Office · Hellenic Army</strong>
-                        <span class="card__date">09/2020 — 05/2021</span>
+                        <strong>Conscript — IT Office · Hellenic Army</strong>
+                        <span class="card__date">Sep 2020 — May 2021</span>
                     </div>
-                    <p>Assigned to office duties leveraging my Computer Science background. Automated repetitive administrative work and supported daily IT operations.</p>
+                    <p>
+                        Assigned to office IT duties on the strength of my Computer Science background. Automated
+                        the administrative work that was consuming the unit's time.
+                    </p>
                     <ul>
-                        <li>Improved an Excel VBA program that automatically assigned soldiers to daily duties.</li>
-                        <li>Updated a tool that automatically tracked and calculated military leave records.</li>
-                        <li>Digitised and archived soldier files, organised by year for fast retrieval.</li>
-                        <li>Conducted intake interviews with newly arrived personnel.</li>
-                        <li>Diagnosed and repaired faulty office electronics.</li>
+                        <li>Rebuilt an Excel VBA program that automatically assigns personnel to daily duties, removing a recurring manual rota.</li>
+                        <li>Reworked the tool that tracks and calculates leave records, eliminating a long-standing source of errors.</li>
+                        <li>Digitised and indexed the unit's personnel archive for fast retrieval.</li>
+                        <li>Ran intake interviews for incoming personnel and repaired faulty office electronics.</li>
                     </ul>
                 </div>
 
                 <div class="card--work-history">
                     <div class="card__header">
-                        <strong>Software Developer &amp; Technical Intern · Classter</strong>
-                        <span class="card__date">07/2020 — 09/2020</span>
+                        <strong>Software Engineering Intern · Classter</strong>
+                        <span class="card__date">Jul 2020 — Sep 2020</span>
                     </div>
-                    <p>Started my career at Classter as a summer intern, gaining hands-on exposure to a real-world product, processes, and engineering teamwork.</p>
+                    <p>
+                        First exposure to a real product and a real engineering process — and the start of an
+                        unbroken run at the same company.
+                    </p>
                     <ul>
-                        <li>Wrote test cases and validated new features through manual software testing.</li>
+                        <li>Wrote test cases and validated new features through structured manual testing.</li>
                         <li>Documented database schemas to support onboarding and feature work.</li>
-                        <li>Designed custom CSS themes for the company's main product.</li>
-                        <li>Assisted in setting up the company's new internal network infrastructure.</li>
+                        <li>Built custom CSS themes for the company's main product.</li>
+                        <li>Assisted in setting up the company's internal network infrastructure.</li>
                     </ul>
-                </div>
-            </section>
-
-            <section id="education-wrapper" class="section--page">
-                <h2>Education</h2>
-
-                <div class="card--education">
-                    <div class="card__header">
-                        <strong>Democritus University of Thrace (D.U.Th.)</strong>
-                        <span class="card__date">01/2015 — 07/2021</span>
-                    </div>
-                    <p>Integrated Master's in Electrical &amp; Computer Engineering — specialisation in Computer Software Engineering.</p>
-                    <p class="muted">Final grade: 7.03 / 10</p>
                 </div>
             </section>
 
             <section class="section--page">
-                <h2>Projects &amp; Accomplishments</h2>
+                <h2>Selected Projects</h2>
+                <p class="section__lead">
+                    Beyond Watchario — self-directed builds, each one a live deployment rather than a repository
+                    that was never run. Everything below is on
+                    <a href="https://github.com/ttsiligkoudis" target="_blank" rel="noopener">GitHub</a>.
+                </p>
 
                 <div class="projects-grid">
                     <a class="card--project" href="https://eshop.myportofolio.eu" target="_blank" rel="noopener">
                         <span class="card--project__title">EShop — ASP.NET Core</span>
-                        <span class="card--project__desc">Production-grade e-commerce web app rebuilt on ASP.NET Core with advanced patterns and a clean architecture.</span>
+                        <span class="card--project__desc">Full e-commerce application on ASP.NET Core: catalogue, cart, orders and admin, built on a clean layered architecture.</span>
+                        <span class="card--project__meta">Live</span>
                     </a>
 
                     <a class="card--project" href="https://eshopapi.myportofolio.eu/swagger" target="_blank" rel="noopener">
                         <span class="card--project__title">EShop Web API</span>
-                        <span class="card--project__desc">REST API powering the EShop application, fully documented with Swagger / OpenAPI.</span>
-                    </a>
-
-                    <a class="card--project" href="https://github.com/ttsiligkoudis/EShop-MVC" target="_blank" rel="noopener">
-                        <span class="card--project__title">EShop — ASP.NET MVC</span>
-                        <span class="card--project__desc">Original e-commerce build using the classic ASP.NET MVC stack as a learning baseline.</span>
-                    </a>
-
-                    <a class="card--project" href="https://github.com/ttsiligkoudis/EShopMobile" target="_blank" rel="noopener">
-                        <span class="card--project__title">EShop Mobile</span>
-                        <span class="card--project__desc">Cross-platform mobile companion app for the EShop project, built with ASP.NET MAUI.</span>
-                    </a>
-
-                    <a class="card--project" href="https://library.myportofolio.eu" target="_blank" rel="noopener">
-                        <span class="card--project__title">Library Web App</span>
-                        <span class="card--project__desc">Full library management web application built on ASP.NET Core, reusing patterns from the EShop project.</span>
-                    </a>
-
-                    <a class="card--project" href="https://hangman.myportofolio.eu" target="_blank" rel="noopener">
-                        <span class="card--project__title">Hangman Web</span>
-                        <span class="card--project__desc">Browser version of the classic Hangman game, built with vanilla HTML, CSS, and JavaScript.</span>
-                    </a>
-
-                    <a class="card--project" href="https://github.com/ttsiligkoudis/HangMan-Mobile" target="_blank" rel="noopener">
-                        <span class="card--project__title">Hangman Mobile</span>
-                        <span class="card--project__desc">Native-feel mobile version of Hangman built with ASP.NET MAUI for iOS and Android.</span>
-                    </a>
-
-                    <a class="card--project" href="https://chat.myportofolio.eu" target="_blank" rel="noopener">
-                        <span class="card--project__title">Real-Time Chat &amp; Hangman Online</span>
-                        <span class="card--project__desc">SignalR server enabling real-time messaging and online multiplayer gameplay for Hangman.</span>
+                        <span class="card--project__desc">The REST API behind EShop — versioned, documented with Swagger, and consumed by both the web and mobile clients.</span>
+                        <span class="card--project__meta">Live · OpenAPI</span>
                     </a>
 
                     <a class="card--project" href="https://tools.myportofolio.eu/" target="_blank" rel="noopener">
                         <span class="card--project__title">Online Tools Suite</span>
-                        <span class="card--project__desc">Collection of everyday developer utilities built on ASP.NET Core Blazor.</span>
+                        <span class="card--project__desc">A set of everyday developer utilities built on ASP.NET Core Blazor, sharing one component library.</span>
+                        <span class="card--project__meta">Live · Blazor</span>
+                    </a>
+
+                    <a class="card--project" href="https://library.myportofolio.eu" target="_blank" rel="noopener">
+                        <span class="card--project__title">Library Management</span>
+                        <span class="card--project__desc">Lending and catalogue management on ASP.NET Core, reusing the architectural patterns proven in EShop.</span>
+                        <span class="card--project__meta">Live</span>
+                    </a>
+
+                    <a class="card--project" href="https://chat.myportofolio.eu" target="_blank" rel="noopener">
+                        <span class="card--project__title">Real-Time Chat &amp; Multiplayer</span>
+                        <span class="card--project__desc">SignalR server powering live messaging and online multiplayer sessions across the web and mobile clients.</span>
+                        <span class="card--project__meta">Live · SignalR</span>
                     </a>
 
                     <a class="card--project" href="https://fileservice.myportofolio.eu/swagger" target="_blank" rel="noopener">
                         <span class="card--project__title">File Service API</span>
-                        <span class="card--project__desc">Personal file-handling REST API written in ASP.NET Core, used across my other projects.</span>
+                        <span class="card--project__desc">A shared file-handling REST service in ASP.NET Core that every other project in this list depends on.</span>
+                        <span class="card--project__meta">Live · OpenAPI</span>
+                    </a>
+
+                    <a class="card--project" href="https://github.com/ttsiligkoudis/EShopMobile" target="_blank" rel="noopener">
+                        <span class="card--project__title">EShop Mobile</span>
+                        <span class="card--project__desc">Cross-platform .NET MAUI client for the EShop API — the same domain, a native shell.</span>
+                        <span class="card--project__meta">.NET MAUI</span>
                     </a>
 
                     <a class="card--project" href="https://github.com/ttsiligkoudis/Arduino-GPS-GSM-Device" target="_blank" rel="noopener">
                         <span class="card--project__title">Arduino Anti-Theft Device</span>
-                        <span class="card--project__desc">Embedded GPS / GSM / GPRS prototype that detects and reports unauthorised movement.</span>
+                        <span class="card--project__desc">Embedded GPS / GSM / GPRS prototype that detects unauthorised movement and reports its position over the mobile network.</span>
+                        <span class="card--project__meta">Embedded C++</span>
                     </a>
 
-                    <a class="card--project" href="https://github.com/ttsiligkoudis/Arduino-Camera-Snapshot" target="_blank" rel="noopener">
-                        <span class="card--project__title">Arduino Camera Snapshot</span>
-                        <span class="card--project__desc">Companion Arduino camera module that captures snapshots for the anti-theft device.</span>
+                    <a class="card--project" href="https://hangman.myportofolio.eu" target="_blank" rel="noopener">
+                        <span class="card--project__title">Hangman — Web &amp; Mobile</span>
+                        <span class="card--project__desc">The classic game in vanilla JavaScript and as a .NET MAUI app, with online multiplayer over the SignalR server above.</span>
+                        <span class="card--project__meta">Live</span>
                     </a>
                 </div>
             </section>
 
+            <section id="education-wrapper" class="section--page">
+                <h2>Education &amp; Credentials</h2>
+
+                <div class="card--education">
+                    <div class="card__header">
+                        <strong>Democritus University of Thrace (D.U.Th.)</strong>
+                        <span class="card__date">Sep 2014 — Jun 2021</span>
+                    </div>
+                    <p>
+                        Integrated Master's (300 ECTS) in Electrical &amp; Computer Engineering,
+                        specialising in Computer Software Engineering. Recognised as a Master's-level degree
+                        across the EU.
+                    </p>
+                    <p class="muted">Final grade 7.03 / 10 · Diploma Supplement available on request</p>
+                </div>
+
+                <div class="two-col" style="margin-top:2em;">
+                    <div>
+                        <h3 class="stack-group__label" style="margin-bottom:.75em;">Certifications</h3>
+                        <ul class="plain-list">
+                            <li><span>LinkedIn &amp; AI: Enhancing Your Career</span><span>2025</span></li>
+                            <li><span>Artificial Intelligence &amp; ChatGPT</span><span>2024</span></li>
+                            <li><span>Life Skills &amp; Social Entrepreneurship — British Council</span><span>2019</span></li>
+                            <li><span>Renewable Energy, Sustainability &amp; Development</span><span>2016</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="stack-group__label" style="margin-bottom:.75em;">Languages &amp; Eligibility</h3>
+                        <ul class="plain-list">
+                            <li><span>Greek</span><span>Native</span></li>
+                            <li><span>English</span><span>C2 — Certificate of Competency</span></li>
+                            <li><span>EU citizenship</span><span>No sponsorship required</span></li>
+                            <li><span>Time zone</span><span>EET (UTC+2)</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
             <footer class="section--page footer">
-                <h2>Let's Build Something</h2>
-                <p>Open to new opportunities — full-time, contract, or collaboration. The fastest way to reach me is by email.</p>
-                <p class="footer__cta"><a href="mailto:themtsil@gmail.com">themtsil@gmail.com</a></p>
+                <h2>Let's talk</h2>
+                <p>
+                    I am open to senior full-stack or backend .NET roles that are fully remote —
+                    the EU, Switzerland, the Netherlands and the Nordics in particular. My working
+                    day overlaps the entire Central European one. Email is the fastest way to reach me.
+                </p>
+                <ul class="cta-row">
+                    <li><a class="btn btn--primary" href="mailto:themtsil@gmail.com?subject=Role%20enquiry">themtsil@gmail.com</a></li>
+                    <li><a class="btn" href="https://www.linkedin.com/in/ttsiligkoudis/" target="_blank" rel="noopener">LinkedIn</a></li>
+                    <li><a class="btn no-print" href="./assets/Themis-Tsiligkoudis-CV.pdf" target="_blank" rel="noopener">Download CV</a></li>
+                </ul>
+                <p class="colophon">
+                    Built from scratch — no framework, no build step. Source on
+                    <a href="https://github.com/ttsiligkoudis/Digital-Resume" target="_blank" rel="noopener">GitHub</a>.
+                </p>
             </footer>
 
-        </main>
+        </div>
+    </main>
 
-        <script src="scripts/theme.js"></script>
-
-    </body>
+    <script src="./scripts/theme.js" defer></script>
+</body>
 </html>

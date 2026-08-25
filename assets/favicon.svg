@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TT monogram">
+    <rect width="64" height="64" rx="14" fill="#0b0d0e"/>
+    <path d="M10 20h20M20 20v26" stroke="#22c9e0" stroke-width="6" stroke-linecap="round"/>
+    <path d="M34 20h20M44 20v26" stroke="#f2f4f5" stroke-width="6" stroke-linecap="round"/>
+</svg>

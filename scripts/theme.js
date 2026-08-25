@@ -1,36 +1,60 @@
-const themeCSS = document.querySelector('link#theme-css');
-const themeToggle = document.getElementById('theme-toggle');
-const themeIcon = themeToggle ? themeToggle.querySelector('.theme-toggle__icon') : null;
+/* Theme toggle.
+   The initial theme is applied by an inline script in <head> before first
+   paint — this file only wires the button and keeps it in sync with the OS
+   when the visitor has never made an explicit choice. */
+(function () {
+    'use strict';
 
-const ICONS = {
-    light: '☀',
-    dark: '☾'
-};
+    var STORAGE_KEY = 'portfolio-theme';
+    var ICONS = { light: '☀', dark: '☾' };
 
-function applyTheme(theme){
-    if (theme === 'light'){
-        themeCSS.href = 'styles/light.css';
-        if (themeIcon) themeIcon.textContent = ICONS.light;
-        themeToggle?.setAttribute('aria-label', 'Switch to dark theme');
-    } else {
-        themeCSS.href = '';
-        if (themeIcon) themeIcon.textContent = ICONS.dark;
-        themeToggle?.setAttribute('aria-label', 'Switch to light theme');
-    }
-}
+    var root = document.documentElement;
+    var toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
 
-const stored = localStorage.getItem('portfolio-theme');
-applyTheme(stored === 'light' ? 'light' : 'dark');
+    var icon = toggle.querySelector('.theme-toggle__icon');
+    var media = window.matchMedia('(prefers-color-scheme: light)');
 
-themeToggle?.addEventListener('click', () => {
-    const current = localStorage.getItem('portfolio-theme') === 'light' ? 'light' : 'dark';
-    const next = current === 'light' ? 'dark' : 'light';
-
-    if (next === 'light'){
-        localStorage.setItem('portfolio-theme', 'light');
-    } else {
-        localStorage.removeItem('portfolio-theme');
+    function stored() {
+        try {
+            return localStorage.getItem(STORAGE_KEY);
+        } catch (e) {
+            return null; // Private mode / blocked storage — fall back to the OS.
+        }
     }
 
-    applyTheme(next);
-});
+    function effective() {
+        return stored() || (media.matches ? 'light' : 'dark');
+    }
+
+    function render(theme) {
+        if (icon) icon.textContent = ICONS[theme];
+        toggle.setAttribute(
+            'aria-label',
+            theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'
+        );
+        toggle.setAttribute('aria-pressed', String(theme === 'light'));
+    }
+
+    function apply(theme) {
+        root.setAttribute('data-theme', theme);
+        render(theme);
+    }
+
+    render(effective());
+
+    toggle.addEventListener('click', function () {
+        var next = effective() === 'light' ? 'dark' : 'light';
+        try {
+            localStorage.setItem(STORAGE_KEY, next);
+        } catch (e) {
+            /* Not persisting is survivable; the page still flips. */
+        }
+        apply(next);
+    });
+
+    // Follow the OS only while the visitor hasn't picked a side.
+    media.addEventListener('change', function () {
+        if (!stored()) apply(media.matches ? 'light' : 'dark');
+    });
+})();

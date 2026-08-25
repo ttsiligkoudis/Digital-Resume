@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page not found — Themis Tsiligkoudis</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="/styles/main.css">
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('portfolio-theme');
+                if (t === 'light' || t === 'dark') {
+                    document.documentElement.setAttribute('data-theme', t);
+                }
+            } catch (e) { /* Blocked storage — the OS preference decides. */ }
+        })();
+    </script>
+</head>
+<body>
+    <main id="main">
+        <div id="container--main">
+            <div class="footer" style="border-top:none;margin-top:6em;">
+                <p class="eyebrow">404</p>
+                <h2>That page isn't here</h2>
+                <p>The link may be out of date. Everything worth reading is one click away.</p>
+                <ul class="cta-row">
+                    <li><a class="btn btn--primary" href="/">Résumé</a></li>
+                    <li><a class="btn" href="/watchario.html">Watchario case study</a></li>
+                    <li><a class="btn" href="https://github.com/ttsiligkoudis" target="_blank" rel="noopener">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
