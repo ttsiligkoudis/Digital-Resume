@@ -575,35 +575,54 @@ h2{
     border:1px solid var(--border);
     border-radius:var(--radius);
     background:var(--surface);
-    transition:border-color .18s ease, transform .18s ease, background-color .18s ease;
+    transition:border-color .18s ease;
 }
 
-.card--project:hover{
-    border-color:var(--accent-line);
-    background:var(--accent-soft);
-    transform:translateY(-2px);
-    opacity:1;
-}
+.card--project:hover{ border-color:var(--accent-line); }
 
 .card--project__title{
     color:var(--text);
     font-weight:600;
     font-size:.97rem;
+    margin:0;
+    line-height:1.4;
 }
 
 .card--project__desc{
     color:var(--text-dim);
     font-size:.87rem;
     line-height:1.55;
+    margin:0;
 }
 
-.card--project__meta{
-    margin-top:.35em;
-    font-size:.75rem;
-    letter-spacing:.05em;
-    text-transform:uppercase;
-    color:var(--accent);
-    font-weight:600;
+/* Pushed to the bottom so the link rows align across a grid of uneven cards. */
+.card--project__links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.35em .9em;
+    margin:auto 0 0;
+    padding-top:.7em;
+    font-size:.83rem;
+}
+
+.card--project__links a{ font-weight:600; }
+
+/* Set by scripts/projects.js when a status endpoint reports the demo down.
+   Without that endpoint nothing here applies and the link stays normal. */
+.card--project__links a.is-down{
+    color:var(--text-dim);
+    text-decoration:line-through;
+    text-decoration-thickness:1px;
+    pointer-events:none;
+    cursor:default;
+}
+
+.card--project__links a.is-down::after{
+    content:" offline";
+    font-weight:400;
+    font-size:.9em;
+    text-decoration:none;
+    display:inline-block;
 }
 
 /* ---------------------------------------------------------- extras ------ */
@@ -1000,7 +1019,8 @@ h2{
     .card--project{ break-inside:avoid; padding:.5em .7em; gap:.2em; }
     .card--project__title{ font-size:9pt; }
     .card--project__desc{ font-size:8.1pt; line-height:1.4; }
-    .card--project__meta{ font-size:7pt; margin-top:.2em; }
+    .card--project__links{ font-size:7.6pt; padding-top:.3em; gap:.1em .7em; }
+    .card--project__links a.is-down{ text-decoration:none; }
 
     .card--work-history > p,
     .card--education > p{ font-size:8.8pt; margin-bottom:.45em; }

@@ -32,6 +32,13 @@ PDF CV, which is printed straight from `index.html` so the two can never drift a
   a canonical URL, `robots.txt` and `sitemap.xml`.
 - **Accessibility.** Skip link, visible focus rings, semantic landmarks, `prefers-reduced-motion`,
   and text that clears WCAG AA contrast in both themes.
+- **Live-demo status** *(optional)*. Every project links its source as well as its demo, so a
+  deployment being down is never a dead end. `scripts/projects.js` can additionally strike
+  through a demo that is offline — but only with a status endpoint, because a page cannot read
+  another origin's HTTP status: `fetch` in no-cors mode resolves for a 502 exactly as for a 200.
+  [`tools/status-worker.js`](./tools/status-worker.js) is that endpoint, as a Cloudflare Worker
+  with a host allowlist so it cannot be used as an open request proxy. With no endpoint
+  configured the script does nothing.
 
 ## Regenerating the PDF
 
