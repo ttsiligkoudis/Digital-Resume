@@ -23,9 +23,11 @@ PDF CV, which is printed straight from `index.html` so the two can never drift a
   decides by default; the toggle overrides it and persists in `localStorage`. An inline
   script in `<head>` applies the stored choice before first paint, so the page never flashes
   the wrong theme.
-- **Print.** `@media print` in the same stylesheet re-renders the page as a paper CV —
-  ink-friendly colours, tighter type, `break-inside` rules so nothing splits across a page,
-  and link targets surfaced as text since a printed `<a>` has nowhere to go.
+- **Print.** `@media print` in the same stylesheet re-renders the page as a paper CV on
+  **A4** (`@page { size: A4 }` — Chromium would otherwise default to US Letter): ink-friendly
+  colours, tighter type, link targets surfaced as text since a printed `<a>` has nowhere to go,
+  and pagination rules that keep every bullet, role, stack row and project card whole rather
+  than letting one split across a page boundary.
 - **Discoverability.** `schema.org/Person` JSON-LD, Open Graph and Twitter card metadata,
   a canonical URL, `robots.txt` and `sitemap.xml`.
 - **Accessibility.** Skip link, visible focus rings, semantic landmarks, `prefers-reduced-motion`,
@@ -34,7 +36,7 @@ PDF CV, which is printed straight from `index.html` so the two can never drift a
 ## Regenerating the PDF
 
 The CV is Chromium's print output for `index.html`, so editing the page is the only way the
-PDF changes:
+PDF changes. The page size comes from the stylesheet, so no paper flag is needed:
 
 ```bash
 chromium --headless --no-pdf-header-footer \
