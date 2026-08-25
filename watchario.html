@@ -58,14 +58,14 @@
                 <h1>Watchario</h1>
                 <p class="case-hero__lead">
                     A media-tracking product that keeps four independent third-party services in lockstep.
-                    One .NET 10 codebase serves a Blazor web app, a Stremio addon, a cross-browser extension
-                    and an Android build — with a public, documented REST API underneath all of them.
-                    I designed it, wrote it, deploy it and answer for it when it breaks.
+                    One .NET 10 codebase serves a Blazor web app, a native Android and Android TV app, a
+                    Stremio addon and a cross-browser extension — with a public, documented REST API
+                    underneath all of them. I designed it, wrote it, deploy it and answer for it when it breaks.
                 </p>
 
                 <ul class="cta-row">
                     <li><a class="btn btn--primary" href="https://watchario.app" target="_blank" rel="noopener">Open the live app</a></li>
-                    <li><a class="btn" href="https://github.com/ttsiligkoudis/Watchario" target="_blank" rel="noopener">Source on GitHub</a></li>
+                    <li><a class="btn" href="https://github.com/ttsiligkoudis/watchario-app" target="_blank" rel="noopener">Project on GitHub</a></li>
                     <li><a class="btn" href="https://watchario.app/api/docs" target="_blank" rel="noopener">API documentation</a></li>
                 </ul>
             </header>
@@ -77,7 +77,11 @@
                 </div>
                 <div>
                     <dt>Status</dt>
-                    <dd>Live in production with paying users; Android build in review for Google Play</dd>
+                    <dd>Live in production with paying users; Android app shipping as a direct APK, Google Play release in preparation</dd>
+                </div>
+                <div>
+                    <dt>Codebase</dt>
+                    <dd>Private — happy to walk through any of it on a call</dd>
                 </div>
                 <div>
                     <dt>Core stack</dt>
@@ -132,7 +136,10 @@
                 <p>
                     Five .NET projects: a shared client component library, a server, a Blazor Web host, its
                     WebAssembly client, and the MAUI head. The web app and the native app render the same
-                    Razor components — the difference between them is the host, not the UI.
+                    Razor components — the difference between them is the host, not the UI. Playback is the
+                    one place that deliberately is not shared: phones run libVLC behind a custom player
+                    chrome, Android TV runs Media3 / ExoPlayer with D-pad-first controls and HDR-to-SDR
+                    tone mapping, because a touch player and a ten-foot player are not the same product.
                 </p>
             </section>
 
@@ -163,6 +170,33 @@
                             browser extension, and Plex/Jellyfin/Emby webhooks. There is exactly one place in
                             the codebase where a progress update is written, which is the only reason four
                             surfaces stay consistent.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="deep-dive">
+                    <summary>Making four services agree on what a title is</summary>
+                    <div class="deep-dive__body">
+                        <p>
+                            Everything above depends on a question none of the providers can answer: is the
+                            thing the user just watched on service A the same thing as this entry on service B?
+                            Each maintains its own identifier namespace, and the film and television databases
+                            the metadata comes from maintain three more.
+                        </p>
+                        <p>
+                            So a title has to resolve across seven namespaces — AniList, Kitsu, MyAnimeList,
+                            IMDb, TMDb, TheTVDB and AniDB — and the mapping is not static: new titles appear
+                            weekly and existing entries get corrected. An automated pipeline refreshes it daily
+                            from the open mapping datasets, enriches the gaps, and publishes the result through
+                            the public API so other projects can use it too.
+                        </p>
+                        <p>
+                            The hard cases are structural rather than missing rows. A franchise that one service
+                            models as seasons 1..N is often a single flat season elsewhere, so a split-cour show
+                            has to be sliced back into per-cour numbering using the preceding cours' episode
+                            counts — otherwise opening the second cour of a series shows all forty episodes
+                            instead of its own twelve. Reconstructing that requires walking the relation graph,
+                            not a lookup table.
                         </p>
                     </div>
                 </details>
@@ -218,6 +252,12 @@
                             <code>Information</code>. The keys were going into production logs without a single
                             log statement of mine being involved. The fix pins that client's log category to
                             <code>Warning</code>, and an automated check now fails the build if anyone lowers it.
+                        </p>
+                        <p>
+                            The same instinct governs crash reporting: diagnostics are opt-out, and the payload
+                            is redacted <em>on the device</em> before it is uploaded, so keys and tokens never
+                            leave the user's phone in the first place. Redacting at the receiving end would have
+                            been less code and the wrong boundary.
                         </p>
                     </div>
                 </details>
@@ -390,12 +430,12 @@
             <footer class="section--page footer">
                 <h2>Interested in the details?</h2>
                 <p>
-                    The whole thing is open source, and I am happy to walk through any part of it —
-                    including the parts I would rewrite.
+                    The codebase itself is private, but nothing about it is secret: I am happy to share my
+                    screen and walk through any part of it — including the parts I would rewrite.
                 </p>
                 <ul class="cta-row">
                     <li><a class="btn btn--primary" href="mailto:themtsil@gmail.com?subject=Watchario">themtsil@gmail.com</a></li>
-                    <li><a class="btn" href="https://github.com/ttsiligkoudis/Watchario" target="_blank" rel="noopener">Source</a></li>
+                    <li><a class="btn" href="https://github.com/ttsiligkoudis/watchario-app" target="_blank" rel="noopener">Project on GitHub</a></li>
                     <li><a class="btn" href="./index.html">Back to my résumé</a></li>
                 </ul>
             </footer>

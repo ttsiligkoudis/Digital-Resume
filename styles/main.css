@@ -877,9 +877,49 @@ h2{
         --shadow:none;
     }
 
-    @page{ margin:14mm 13mm; }
+    @page{
+        size:A4;
+        margin:13mm 12mm 12mm;
+    }
 
     body{ font-size:9.6pt; line-height:1.42; background:#fff; }
+
+    /* ---- Pagination.
+       Nothing that reads as one unit may be split across a page boundary: a
+       bullet, a role, a project card, a stack row. Blocks that are allowed to
+       flow (the grids, the sections) keep their children intact instead. ---- */
+
+    p,li{ orphans:3; widows:3; }
+
+    h2,h3,
+    .section__lead,
+    .card__header,
+    .featured__head,
+    .case-hero h1{ break-after:avoid; }
+
+    .stat-band,
+    .meta-grid,
+    .diagram,
+    .callout,
+    .deep-dive,
+    .stack-group,
+    .two-col > div,
+    .plain-list li,
+    #qualifications--list li,
+    .featured__points li,
+    .card--work-history li,
+    .availability li,
+    .tags li{ break-inside:avoid; }
+
+    /* Containers stay breakable — only their children are atomic. */
+    .projects-grid,
+    #qualifications--list,
+    .featured__points,
+    .two-col,
+    section{ break-inside:auto; }
+
+    /* A collapsed <details> prints as a bare heading; open them all on paper. */
+    .deep-dive__body{ display:block !important; }
 
     .theme-toggle,
     .skip-link,
