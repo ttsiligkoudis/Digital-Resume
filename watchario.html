@@ -60,7 +60,8 @@
                     A media-tracking product that keeps four independent third-party services in lockstep.
                     One .NET 10 codebase serves a Blazor web app, a native Android and Android TV app, a
                     Stremio addon and a cross-browser extension — with a public, documented REST API
-                    underneath all of them. I designed it, wrote it, deploy it and answer for it when it breaks.
+                    underneath all of them. Three iterations and several years in, I designed it, wrote it,
+                    deploy it and answer for it when it breaks.
                 </p>
 
                 <ul class="cta-row">
@@ -106,6 +107,15 @@
                     services disagree about almost everything: identifiers, list statuses, score scales,
                     authentication, rate limits, and whether an episode belongs to season 2 or is episode 27
                     of a single flat season. Everything interesting in this project sits in that disagreement.
+                </p>
+                <p>
+                    <strong>This is the third iteration.</strong> It began as <em>AnimeList</em>, a personal
+                    tracker against a single service. It became <em>AniSync</em> once keeping several services
+                    aligned turned out to be the part actually worth building. It became
+                    <em>Watchario</em> when the same machinery proved it worked for films and series too — at
+                    which point every anime-shaped assumption still sitting in the data model had to come out.
+                    Each rewrite was triggered by the same thing: the scope outgrew a decision I had made too
+                    early, and patching around it would have cost more than redoing it.
                 </p>
             </section>
 

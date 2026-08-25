@@ -7,7 +7,7 @@
     <title>Themis Tsiligkoudis — Senior Full-Stack .NET Engineer</title>
     <meta name="description" content="Senior Full-Stack .NET Engineer with 6 years of production experience in C#, ASP.NET Core, Blazor and SQL Server. Based in Kavala, Greece (UTC+2) and open to fully remote roles across the EU, Switzerland and the Nordics. Builder and sole operator of watchario.app.">
     <meta name="author" content="Themis Tsiligkoudis">
-    <meta name="keywords" content="Themis Tsiligkoudis, Senior .NET Developer, Full-Stack Engineer, C#, ASP.NET Core, Blazor, .NET MAUI, SQL Server, Remote Developer Greece, Remote .NET Engineer Europe">
+    <meta name="keywords" content="Themis Tsiligkoudis, Senior .NET Developer, Full-Stack Engineer, C#, ASP.NET Core, Blazor, .NET MAUI, JavaScript, jQuery, SQL Server, Remote Developer Greece, Remote .NET Engineer Europe">
     <link rel="canonical" href="https://myportofolio.eu/">
 
     <meta property="og:type" content="profile">
@@ -81,7 +81,7 @@
             "url": "https://duth.gr"
         },
         "knowsAbout": [
-            "C#", ".NET", "ASP.NET Core", "Blazor", ".NET MAUI", "SQL Server",
+            "C#", ".NET", "ASP.NET Core", "Blazor", ".NET MAUI", "JavaScript", "jQuery", "SQL Server",
             "T-SQL", "Entity Framework Core", "REST API design", "OpenAPI",
             "SignalR", "SQL Server Reporting Services", "Docker", "OAuth 2.0",
             "Azure DevOps", "Cloudflare Workers", "Fly.io"
@@ -252,8 +252,10 @@
                     <p class="stack-group__label">Frontend</p>
                     <ul class="stack-group__items">
                         <li>Blazor Web (SSR + WASM)</li><li>Blazor Hybrid</li><li>Razor</li>
-                        <li>.NET MAUI</li><li>Responsive design</li><li>PWA</li>
+                        <li>.NET MAUI</li><li>JavaScript (ES6+)</li><li>jQuery</li>
+                        <li>AJAX</li><li>Responsive design</li><li>PWA</li>
                         <li>Web Push</li><li>Accessibility</li><li>Localisation (i18n)</li>
+                        <li>WordPress</li>
                     </ul>
                 </div>
 
@@ -300,7 +302,7 @@
                     <ul>
                         <li>Delivered <strong>2,700+ Azure DevOps work items</strong> — features, backlog items and defects — accounting for <strong>5,000+ tracked engineering hours</strong>.</li>
                         <li><strong>100+ of those were multi-day features</strong> of eight hours or more, together over 40% of all my tracked time — the depth behind the volume.</li>
-                        <li>Designed and shipped features across the stack in ASP.NET, C#, JavaScript and T-SQL, from schema change to released UI.</li>
+                        <li>Designed and shipped features across the stack — ASP.NET and C# on the server, jQuery and vanilla JavaScript across a large established front end, T-SQL underneath — from schema change to released UI.</li>
                         <li>Root-caused and fixed complex production defects spanning application code, stored procedures and third-party integrations.</li>
                         <li>Refactored legacy modules onto modern patterns, cutting repeat incidents and making the affected areas safe for the rest of the team to change.</li>
                         <li>Reviewed teammates' pull requests and contributed to technical decisions on new modules.</li>
@@ -364,66 +366,112 @@
             <section class="section--page">
                 <h2>Selected Projects</h2>
                 <p class="section__lead">
-                    Beyond Watchario — self-directed builds, each one a live deployment rather than a repository
-                    that was never run. Everything below is on
-                    <a href="https://github.com/ttsiligkoudis" target="_blank" rel="noopener">GitHub</a>.
+                    Beyond Watchario — self-directed builds, each shipped rather than abandoned half-finished.
+                    Where a demo is deployed it is linked; the source sits next to it either way.
                 </p>
 
                 <div class="projects-grid">
-                    <a class="card--project" href="https://eshop.myportofolio.eu" target="_blank" rel="noopener">
-                        <span class="card--project__title">EShop — ASP.NET Core</span>
-                        <span class="card--project__desc">Full e-commerce application on ASP.NET Core: catalogue, cart, orders and admin, built on a clean layered architecture.</span>
-                        <span class="card--project__meta">Live</span>
-                    </a>
+                    <article class="card--project">
+                        <h3 class="card--project__title">Sedulum — Scheduling SaaS</h3>
+                        <p class="card--project__desc">Multi-tenant appointment-scheduling platform: every customer is provisioned its own subdomain with isolated data and per-tenant configuration, behind a marketing site with its own pricing and sign-up flow. Infrastructure, database, tenant model and settings layer all designed from scratch.</p>
+                        <p class="card--project__links">
+                            <a class="print-url" data-url="sedulum.com" href="https://sedulum.com/" data-live-demo target="_blank" rel="noopener">Live site</a>
+                        </p>
+                    </article>
 
-                    <a class="card--project" href="https://eshopapi.myportofolio.eu/swagger" target="_blank" rel="noopener">
-                        <span class="card--project__title">EShop Web API</span>
-                        <span class="card--project__desc">The REST API behind EShop — versioned, documented with Swagger, and consumed by both the web and mobile clients.</span>
-                        <span class="card--project__meta">Live · OpenAPI</span>
-                    </a>
+                    <article class="card--project">
+                        <h3 class="card--project__title">Nomad Riders Go</h3>
+                        <p class="card--project__desc">Route guide for a Kavala motorcycling channel, on the same .NET MAUI Blazor stack as Watchario and deployed to Fly.io. Curated routes plus the channel&rsquo;s latest uploads pulled live from the YouTube Data API.</p>
+                        <p class="card--project__links">
+                            <a class="print-url" data-url="nomadridersgo.fly.dev" href="https://nomadridersgo.fly.dev/" data-live-demo target="_blank" rel="noopener">Live app</a>
+                        </p>
+                    </article>
 
-                    <a class="card--project" href="https://tools.myportofolio.eu/" target="_blank" rel="noopener">
-                        <span class="card--project__title">Online Tools Suite</span>
-                        <span class="card--project__desc">A set of everyday developer utilities built on ASP.NET Core Blazor, sharing one component library.</span>
-                        <span class="card--project__meta">Live · Blazor</span>
-                    </a>
+                    <article class="card--project">
+                        <h3 class="card--project__title">EShop — ASP.NET Core</h3>
+                        <p class="card--project__desc">Full e-commerce application on ASP.NET Core: catalogue, cart, orders and admin, built on a clean layered architecture.</p>
+                        <p class="card--project__links">
+                            <a class="print-url" data-url="eshop.myportofolio.eu" href="https://eshop.myportofolio.eu" data-live-demo target="_blank" rel="noopener">Live demo</a>
+                            <a class="print-url" data-url="github.com/ttsiligkoudis/EShop-Core" href="https://github.com/ttsiligkoudis/EShop-Core" target="_blank" rel="noopener">Source</a>
+                        </p>
+                    </article>
 
-                    <a class="card--project" href="https://library.myportofolio.eu" target="_blank" rel="noopener">
-                        <span class="card--project__title">Library Management</span>
-                        <span class="card--project__desc">Lending and catalogue management on ASP.NET Core, reusing the architectural patterns proven in EShop.</span>
-                        <span class="card--project__meta">Live</span>
-                    </a>
+                    <article class="card--project">
+                        <h3 class="card--project__title">EShop Web API</h3>
+                        <p class="card--project__desc">The REST API behind EShop — versioned, documented with Swagger, and consumed by both the web and the mobile client.</p>
+                        <p class="card--project__links">
+                            <a class="print-url" data-url="eshopapi.myportofolio.eu/swagger" href="https://eshopapi.myportofolio.eu/swagger" data-live-demo target="_blank" rel="noopener">Live Swagger</a>
+                            <a class="print-url" data-url="github.com/ttsiligkoudis/EShopAPI" href="https://github.com/ttsiligkoudis/EShopAPI" target="_blank" rel="noopener">Source</a>
+                        </p>
+                    </article>
 
-                    <a class="card--project" href="https://chat.myportofolio.eu" target="_blank" rel="noopener">
-                        <span class="card--project__title">Real-Time Chat &amp; Multiplayer</span>
-                        <span class="card--project__desc">SignalR server powering live messaging and online multiplayer sessions across the web and mobile clients.</span>
-                        <span class="card--project__meta">Live · SignalR</span>
-                    </a>
+                    <article class="card--project">
+                        <h3 class="card--project__title">Online Tools Suite</h3>
+                        <p class="card--project__desc">A set of everyday developer utilities built on ASP.NET Core Blazor, sharing one component library.</p>
+                        <p class="card--project__links">
+                            <a class="print-url" data-url="tools.myportofolio.eu" href="https://tools.myportofolio.eu/" data-live-demo target="_blank" rel="noopener">Live demo</a>
+                        </p>
+                    </article>
 
-                    <a class="card--project" href="https://fileservice.myportofolio.eu/swagger" target="_blank" rel="noopener">
-                        <span class="card--project__title">File Service API</span>
-                        <span class="card--project__desc">A shared file-handling REST service in ASP.NET Core that every other project in this list depends on.</span>
-                        <span class="card--project__meta">Live · OpenAPI</span>
-                    </a>
+                    <article class="card--project">
+                        <h3 class="card--project__title">Library Management</h3>
+                        <p class="card--project__desc">Lending and catalogue management on ASP.NET Core, reusing the architectural patterns proven in EShop.</p>
+                        <p class="card--project__links">
+                            <a class="print-url" data-url="library.myportofolio.eu" href="https://library.myportofolio.eu" data-live-demo target="_blank" rel="noopener">Live demo</a>
+                            <a class="print-url" data-url="github.com/ttsiligkoudis/Library" href="https://github.com/ttsiligkoudis/Library" target="_blank" rel="noopener">Source</a>
+                        </p>
+                    </article>
 
-                    <a class="card--project" href="https://github.com/ttsiligkoudis/EShopMobile" target="_blank" rel="noopener">
-                        <span class="card--project__title">EShop Mobile</span>
-                        <span class="card--project__desc">Cross-platform .NET MAUI client for the EShop API — the same domain, a native shell.</span>
-                        <span class="card--project__meta">.NET MAUI</span>
-                    </a>
+                    <article class="card--project">
+                        <h3 class="card--project__title">Real-Time Chat &amp; Multiplayer</h3>
+                        <p class="card--project__desc">SignalR server powering live messaging and online multiplayer sessions across the web and mobile clients.</p>
+                        <p class="card--project__links">
+                            <a class="print-url" data-url="chat.myportofolio.eu" href="https://chat.myportofolio.eu" data-live-demo target="_blank" rel="noopener">Live demo</a>
+                            <a class="print-url" data-url="github.com/ttsiligkoudis/SignalRServer" href="https://github.com/ttsiligkoudis/SignalRServer" target="_blank" rel="noopener">Source</a>
+                        </p>
+                    </article>
 
-                    <a class="card--project" href="https://github.com/ttsiligkoudis/Arduino-GPS-GSM-Device" target="_blank" rel="noopener">
-                        <span class="card--project__title">Arduino Anti-Theft Device</span>
-                        <span class="card--project__desc">Embedded GPS / GSM / GPRS prototype that detects unauthorised movement and reports its position over the mobile network.</span>
-                        <span class="card--project__meta">Embedded C++</span>
-                    </a>
+                    <article class="card--project">
+                        <h3 class="card--project__title">File Service API</h3>
+                        <p class="card--project__desc">A shared file-handling REST service in ASP.NET Core that every other project in this list depends on.</p>
+                        <p class="card--project__links">
+                            <a class="print-url" data-url="fileservice.myportofolio.eu/swagger" href="https://fileservice.myportofolio.eu/swagger" data-live-demo target="_blank" rel="noopener">Live Swagger</a>
+                        </p>
+                    </article>
 
-                    <a class="card--project" href="https://hangman.myportofolio.eu" target="_blank" rel="noopener">
-                        <span class="card--project__title">Hangman — Web &amp; Mobile</span>
-                        <span class="card--project__desc">The classic game in vanilla JavaScript and as a .NET MAUI app, with online multiplayer over the SignalR server above.</span>
-                        <span class="card--project__meta">Live</span>
-                    </a>
+                    <article class="card--project">
+                        <h3 class="card--project__title">Hangman — Web &amp; Mobile</h3>
+                        <p class="card--project__desc">The classic game in vanilla JavaScript and as a .NET MAUI app, with online multiplayer over the SignalR server above.</p>
+                        <p class="card--project__links">
+                            <a class="print-url" data-url="hangman.myportofolio.eu" href="https://hangman.myportofolio.eu" data-live-demo target="_blank" rel="noopener">Live demo</a>
+                            <a class="print-url" data-url="github.com/ttsiligkoudis/HangMan" href="https://github.com/ttsiligkoudis/HangMan" target="_blank" rel="noopener">Web source</a>
+                            <a class="print-url" data-url="github.com/ttsiligkoudis/HangMan-Mobile" href="https://github.com/ttsiligkoudis/HangMan-Mobile" target="_blank" rel="noopener">Mobile source</a>
+                        </p>
+                    </article>
+
+                    <article class="card--project">
+                        <h3 class="card--project__title">EShop Mobile</h3>
+                        <p class="card--project__desc">Cross-platform .NET MAUI client for the EShop API — the same domain, a native shell.</p>
+                        <p class="card--project__links">
+                            <a class="print-url" data-url="github.com/ttsiligkoudis/EShopMobile" href="https://github.com/ttsiligkoudis/EShopMobile" target="_blank" rel="noopener">Source</a>
+                        </p>
+                    </article>
+
+                    <article class="card--project">
+                        <h3 class="card--project__title">Arduino Anti-Theft Device</h3>
+                        <p class="card--project__desc">Embedded GPS / GSM / GPRS prototype that detects unauthorised movement and reports its position over the mobile network.</p>
+                        <p class="card--project__links">
+                            <a class="print-url" data-url="github.com/ttsiligkoudis/Arduino-GPS-GSM-Device" href="https://github.com/ttsiligkoudis/Arduino-GPS-GSM-Device" target="_blank" rel="noopener">Device source</a>
+                            <a class="print-url" data-url="github.com/ttsiligkoudis/Arduino-Camera-Snapshot" href="https://github.com/ttsiligkoudis/Arduino-Camera-Snapshot" target="_blank" rel="noopener">Camera module</a>
+                        </p>
+                    </article>
                 </div>
+
+                <p class="muted" style="margin-top:1.25em;">
+                    Also on GitHub: the original
+                    <a class="print-url" data-url="github.com/ttsiligkoudis/EShop-MVC" href="https://github.com/ttsiligkoudis/EShop-MVC" target="_blank" rel="noopener">ASP.NET MVC build of EShop</a>,
+                    and <a class="print-url" data-url="github.com/ttsiligkoudis/Digital-Resume" href="https://github.com/ttsiligkoudis/Digital-Resume" target="_blank" rel="noopener">the source of this page</a>.
+                </p>
             </section>
 
             <section id="education-wrapper" class="section--page">
@@ -439,7 +487,9 @@
                         specialising in Computer Software Engineering. Recognised as a Master's-level degree
                         across the EU.
                     </p>
-                    <p class="muted">Final grade 7.03 / 10 · Diploma Supplement available on request</p>
+                    <p class="muted">Final grade 7.03 / 10 ·
+                        <a href="./assets/Diploma Supplement.pdf" target="_blank" rel="noopener">Diploma Supplement (PDF)</a>
+                    </p>
                 </div>
 
                 <div class="two-col" style="margin-top:2em;">
@@ -486,5 +536,6 @@
     </main>
 
     <script src="./scripts/theme.js" defer></script>
+    <script src="./scripts/projects.js" defer></script>
 </body>
 </html>
