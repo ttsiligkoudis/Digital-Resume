@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Watchario — Engineering Case Study · Themis Tsiligkoudis</title>
+    <meta name="description" content="How I designed, built and now operate watchario.app single-handedly: one .NET 10 codebase serving a Blazor web app, a Stremio addon, a browser extension and an Android build, with a 213-endpoint public REST API on top of it.">
+    <meta name="author" content="Themis Tsiligkoudis">
+    <link rel="canonical" href="https://myportofolio.eu/watchario.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Themis Tsiligkoudis">
+    <meta property="og:url" content="https://myportofolio.eu/watchario.html">
+    <meta property="og:title" content="Watchario — Engineering Case Study">
+    <meta property="og:description" content="One .NET 10 codebase, four client surfaces, a 213-endpoint public API, and one engineer on call. The decisions behind watchario.app.">
+    <meta property="og:image" content="https://myportofolio.eu/assets/images/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Watchario — Engineering Case Study">
+    <meta name="twitter:description" content="One .NET 10 codebase, four client surfaces, a 213-endpoint public API, and one engineer on call.">
+    <meta name="twitter:image" content="https://myportofolio.eu/assets/images/og-image.png">
+
+    <meta name="theme-color" content="#0b0d0e" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f7f8f9" media="(prefers-color-scheme: light)">
+
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="./styles/main.css">
+
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('portfolio-theme');
+                if (t === 'light' || t === 'dark') {
+                    document.documentElement.setAttribute('data-theme', t);
+                }
+            } catch (e) { /* Blocked storage — the OS preference decides. */ }
+        })();
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <button id="theme-toggle" class="theme-toggle no-print" type="button" aria-label="Toggle color theme" aria-pressed="false" title="Toggle theme">
+        <span class="theme-toggle__icon" aria-hidden="true">☾</span>
+    </button>
+
+    <main id="main">
+        <div id="container--main">
+
+            <a class="backlink" href="./index.html">← Themis Tsiligkoudis</a>
+
+            <header class="case-hero">
+                <p class="eyebrow">Engineering case study</p>
+                <h1>Watchario</h1>
+                <p class="case-hero__lead">
+                    A media-tracking product that keeps four independent third-party services in lockstep.
+                    One .NET 10 codebase serves a Blazor web app, a Stremio addon, a cross-browser extension
+                    and an Android build — with a public, documented REST API underneath all of them.
+                    I designed it, wrote it, deploy it and answer for it when it breaks.
+                </p>
+
+                <ul class="cta-row">
+                    <li><a class="btn btn--primary" href="https://watchario.app" target="_blank" rel="noopener">Open the live app</a></li>
+                    <li><a class="btn" href="https://github.com/ttsiligkoudis/Watchario" target="_blank" rel="noopener">Source on GitHub</a></li>
+                    <li><a class="btn" href="https://watchario.app/api/docs" target="_blank" rel="noopener">API documentation</a></li>
+                </ul>
+            </header>
+
+            <dl class="meta-grid">
+                <div>
+                    <dt>My role</dt>
+                    <dd>Sole engineer — product, architecture, code, infrastructure, on-call</dd>
+                </div>
+                <div>
+                    <dt>Status</dt>
+                    <dd>Live in production with paying users; Android build in review for Google Play</dd>
+                </div>
+                <div>
+                    <dt>Core stack</dt>
+                    <dd>.NET 10 · ASP.NET Core · Blazor Web · .NET MAUI · SQLite · Docker</dd>
+                </div>
+                <div>
+                    <dt>Infrastructure</dt>
+                    <dd>Fly.io · Litestream · Cloudflare Workers · GitHub Actions</dd>
+                </div>
+            </dl>
+
+            <section class="section--page">
+                <h2>The problem</h2>
+                <p>
+                    People who track what they watch typically keep accounts on several services at once —
+                    AniList, Kitsu, MyAnimeList, Trakt — because their friends are spread across them.
+                    Every existing tool syncs with exactly one. So progress is updated by hand, in one place,
+                    and the other lists quietly rot.
+                </p>
+                <p>
+                    That is not a hard problem to describe. It is a hard problem to build, because those four
+                    services disagree about almost everything: identifiers, list statuses, score scales,
+                    authentication, rate limits, and whether an episode belongs to season 2 or is episode 27
+                    of a single flat season. Everything interesting in this project sits in that disagreement.
+                </p>
+            </section>
+
+            <section class="section--page">
+                <h2>Architecture</h2>
+
+                <pre class="diagram" role="img" aria-label="Architecture diagram: four client surfaces call one ASP.NET Core service, which fans writes out to four tracker providers and reads metadata from a set of enrichment APIs.">
+  Blazor web app     Stremio addon      Browser extension     Android (MAUI)
+        │                  │                  │                   │
+        └──────────────────┴─────────┬─────────┴──────────────────┘
+                                     │   HTTPS · /api/v1 · 213 endpoints
+                    ┌────────────────▼────────────┐
+                    │  ASP.NET Core  ·  .NET 10   │
+                    ├─────────────────────────────┤
+                    │  Sync + write fan-out       │
+                    │  OAuth token custody        │
+                    │  Episode scheduler          │
+                    │  Billing webhooks           │
+                    │  Media-server webhooks      │
+                    └───────┬─────────────┬───────┘
+                            │             │
+        ┌───────────────────┘             └─────────┐
+        ▼                                           ▼
+        SQLite + Litestream                         AniList · Kitsu · MAL
+        continuous replication                      Trakt · TMDb · AniSkip · …
+                </pre>
+
+                <p>
+                    Five .NET projects: a shared client component library, a server, a Blazor Web host, its
+                    WebAssembly client, and the MAUI head. The web app and the native app render the same
+                    Razor components — the difference between them is the host, not the UI.
+                </p>
+            </section>
+
+            <section class="section--page">
+                <h2>Decisions worth defending</h2>
+                <p class="section__lead">
+                    The parts of this project I would actually want to be asked about in an interview.
+                </p>
+
+                <details class="deep-dive">
+                    <summary>Fanning a single write out to four services that disagree</summary>
+                    <div class="deep-dive__body">
+                        <p>
+                            When a user finishes an episode, that one event has to land on every account they
+                            have linked. The providers do not share a vocabulary: one calls a list state
+                            <code>CURRENT</code>, another <code>watching</code>; scores are 0–10 on one service,
+                            0–100 on another, and five smiley faces on a third.
+                        </p>
+                        <p>
+                            The write goes to the primary provider first, because that is the one the user sees
+                            in their catalogue and the one whose failure must surface immediately. Only then do
+                            the secondaries fan out concurrently, each through a normalisation layer that maps
+                            the canonical status and score into that provider's model. A secondary failing is
+                            logged and retried, not surfaced as an error — the user's own list already updated.
+                        </p>
+                        <p>
+                            The same path is reused by every entry point: the web UI, the Stremio addon, the
+                            browser extension, and Plex/Jellyfin/Emby webhooks. There is exactly one place in
+                            the codebase where a progress update is written, which is the only reason four
+                            surfaces stay consistent.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="deep-dive">
+                    <summary>OAuth against four providers, including one that only accepts a downgraded PKCE</summary>
+                    <div class="deep-dive__body">
+                        <p>
+                            Each provider gets its own native flow, so no password ever passes through
+                            infrastructure I control unless the provider gives me no alternative: AniList uses
+                            authorization code, Trakt likewise, MyAnimeList uses PKCE, and Kitsu offers only a
+                            resource-owner password grant.
+                        </p>
+                        <p>
+                            MyAnimeList advertises PKCE but accepts only
+                            <code>code_challenge_method=plain</code> — the variant every guide tells you not to
+                            use. There is no way to make it <code>S256</code>; the choice is to implement it as
+                            specified or not support MyAnimeList. I implemented it, and documented why in the
+                            repository so the next person to read that code does not "fix" it.
+                        </p>
+                        <p>
+                            Refresh failures do not cascade. A provider whose refresh token has expired is
+                            flagged for lazy re-authentication and its pill in the UI shows a
+                            <em>needs reauth</em> badge; the other three keep working. Losing one linked account
+                            should never mean re-linking all of them.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="deep-dive">
+                    <summary>Treating user-supplied URLs as hostile</summary>
+                    <div class="deep-dive__body">
+                        <p>
+                            Users can point Watchario at their own third-party addon endpoints, which means the
+                            server makes outbound HTTP requests to hosts a user chose. That is a server-side
+                            request forgery primitive unless it is handled deliberately.
+                        </p>
+                        <p>
+                            Checking the hostname before the request is not enough: the default handler follows
+                            redirects, so a URL on a legitimate public host can answer <code>302</code> pointing
+                            at <code>[::1]</code> or a private cloud address, and a naive client will follow it
+                            and hand back the body. The real boundary has to be at the socket.
+                        </p>
+                        <p>
+                            So user-supplied traffic goes through a dedicated named <code>HttpClient</code> whose
+                            <code>ConnectCallback</code> vets the resolved address of <em>every</em> hop, with a
+                            connect timeout and a response-size cap. The pre-flight hostname check stays, but only
+                            to produce a decent error message when someone pastes something wrong.
+                        </p>
+                        <p>
+                            A related trap cost me a real leak: those addon URLs embed per-user API keys, and
+                            <code>HttpClient</code>'s own framework logging writes the full request URI at
+                            <code>Information</code>. The keys were going into production logs without a single
+                            log statement of mine being involved. The fix pins that client's log category to
+                            <code>Warning</code>, and an automated check now fails the build if anyone lowers it.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="deep-dive">
+                    <summary>Episode notifications that fire to the second, with no cron server</summary>
+                    <div class="deep-dive__body">
+                        <p>
+                            When an episode a user is watching airs, they should get a notification at the moment
+                            it airs — not up to an hour later. The obvious implementation is a minute-resolution
+                            polling job, which is both wasteful and still imprecise.
+                        </p>
+                        <p>
+                            Instead an in-process <code>BackgroundService</code> pulls the airing schedule once a
+                            day and arms one timer per upcoming episode. Notifications fire exactly on time, the
+                            database is not polled, and there is no external scheduler to operate.
+                        </p>
+                        <p>
+                            That design has one honest weakness: the machine auto-stops when idle to keep hosting
+                            costs near zero, and a stopped machine has no timers. A small Cloudflare Worker
+                            therefore pings the app at the airing moment to wake it — free-tier cron triggers and
+                            KV, no Durable Objects. The in-process scheduler remains the mechanism; the Worker
+                            only guarantees the process is alive to run it.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="deep-dive">
+                    <summary>SQLite in production — and the backup story that makes it defensible</summary>
+                    <div class="deep-dive__body">
+                        <p>
+                            One SQLite file holds every account: tokens, linked providers, notifications, cached
+                            state. For a single-region service with this read pattern it is faster than a network
+                            database and dramatically cheaper. The objection is not performance, it is durability —
+                            a single file on a single volume is a single point of failure.
+                        </p>
+                        <p>
+                            Litestream answers it by streaming the write-ahead log continuously to object storage,
+                            so the recovery point is seconds rather than the last nightly dump. The container
+                            entrypoint restores from the newest replica automatically when it starts on an empty
+                            volume, which means the restore path runs on every fresh deploy rather than being a
+                            document nobody has tested.
+                        </p>
+                        <p>
+                            I have also rehearsed the restore deliberately, and my local development environment
+                            works by pulling a real replica down and scrubbing the credentials out of it. The
+                            backup is exercised weekly whether or not anything has gone wrong.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="deep-dive">
+                    <summary>Every push deploys — so the gate had to move before the push</summary>
+                    <div class="deep-dive__body">
+                        <p>
+                            Pushing to the working branch merges to master and Fly deploys it. There is no review
+                            step, because there is no second engineer. That is a fine arrangement right up until
+                            a commit that compiles but throws during startup ships, and the machine crash-loops.
+                        </p>
+                        <p>
+                            The CI pipeline that used to guard this took over three minutes and ran
+                            <em>after</em> the push — by which point production was already broken. I replaced it
+                            with a pre-flight script that runs the same assertions locally in about a minute, and
+                            a git hook that refuses to push unless it has passed for the exact commit being pushed,
+                            with a clean tree.
+                        </p>
+                        <p>
+                            It checks the failure modes that have actually happened, not the ones that sound
+                            plausible: the app boots and answers its health endpoint <em>twice</em>, ten seconds
+                            apart, because answering once does not prove the process survives; the published
+                            Blazor boot script returns 200, because a build reordering once shipped a site where
+                            every page rendered a static skeleton while the server logs stayed perfectly clean;
+                            and the payment webhook returns its handler's status code rather than one rewritten by
+                            middleware, because that bug burned all sixty of the payment provider's retries on an
+                            unfulfilled purchase.
+                        </p>
+                        <p>
+                            Every check in that script is a scar. When something new breaks, the fix is not
+                            finished until there is a check that would have caught it.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="deep-dive">
+                    <summary>Two languages, enforced by the build</summary>
+                    <div class="deep-dive__body">
+                        <p>
+                            The UI ships in English and Greek. Localisation projects fail in a predictable way:
+                            someone adds a string in a hurry, forgets the translation table, and that language
+                            silently falls back to English for the next six months.
+                        </p>
+                        <p>
+                            So it is not a convention here, it is a gate. A guardrail in the pre-flight script
+                            scans the markup for translated literals and fails the push if any key is missing from
+                            any language table, or if a translation's format placeholders do not match the
+                            original — a mismatch that would otherwise be a runtime exception in front of a user.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="deep-dive">
+                    <summary>The native head, and why the web build cannot vouch for it</summary>
+                    <div class="deep-dive__body">
+                        <p>
+                            The Android app is a .NET MAUI Blazor Hybrid head over the same component library.
+                            The deployment pipeline compiles only the web head, so a MAUI-specific mistake —
+                            a native binding that does not match the Java API — would not surface until it was on
+                            a device. Every change touching that project therefore gets built for Android locally,
+                            in both Debug and Release, before it goes anywhere.
+                        </p>
+                        <p>
+                            The instructive bug was the video player failing to draw under the display cutout.
+                            It needed three separate fixes: window flags on the modal's <em>own</em> window,
+                            because modern MAUI hosts modal pages in a dialog fragment whose window is not the
+                            activity's; opting the page out of safe-area insets; and opting the layouts
+                            <em>inside</em> it out as well, since insets are applied per-layout and a root grid
+                            will happily pad its children away from the notch on its own.
+                        </p>
+                        <p>
+                            I found the third piece by rendering the window flags and view positions as an overlay
+                            on the player itself, after several blind attempts had failed. Making the invisible
+                            state visible solved in one build what guessing had not solved in five.
+                        </p>
+                    </div>
+                </details>
+            </section>
+
+            <section class="section--page">
+                <h2>By the numbers</h2>
+
+                <div class="stat-band">
+                    <p class="stat">
+                        <span class="stat__value">213</span>
+                        <span class="stat__label">REST endpoints, versioned and OpenAPI-documented</span>
+                    </p>
+                    <p class="stat">
+                        <span class="stat__value">100</span>
+                        <span class="stat__label">Razor components shared across web and native</span>
+                    </p>
+                    <p class="stat">
+                        <span class="stat__value">54</span>
+                        <span class="stat__label">Application services behind the API surface</span>
+                    </p>
+                    <p class="stat">
+                        <span class="stat__value">15+</span>
+                        <span class="stat__label">Third-party APIs integrated, each with its own failure modes</span>
+                    </p>
+                </div>
+
+                <div class="callout" style="margin-top:2em;">
+                    <p>
+                        <strong>What this project is really evidence of:</strong> not that I can write a lot of C#,
+                        but that I can own a system in production — decide its architecture, integrate services that
+                        actively resist integration, keep its data recoverable, ship to it safely without a second
+                        pair of eyes, and be the person who fixes it at 11pm when something breaks.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section--page">
+                <h2>What I would do differently</h2>
+                <ul id="qualifications--list">
+                    <li><strong>Automated tests from day one.</strong> The pre-flight gate proves the app builds, boots and answers — it proves nothing about correctness. That was a deliberate trade for speed early on, and it is the decision I would reverse first.</li>
+                    <li><strong>An integration seam per provider, sooner.</strong> The normalisation layer emerged after the third provider rather than before the second, so the first two needed reworking once the shape became clear.</li>
+                    <li><strong>Structured logging with correlation IDs earlier.</strong> Tracing a single write across four concurrent provider calls is harder than it should be, and I only felt that once something went wrong in production.</li>
+                    <li><strong>Ship the container check.</strong> The pre-flight runs the published output on the host, not the image — so the entrypoint, the base image and the replication sidecar are covered by nothing. I know exactly where that gap is; it is not yet closed.</li>
+                </ul>
+            </section>
+
+            <footer class="section--page footer">
+                <h2>Interested in the details?</h2>
+                <p>
+                    The whole thing is open source, and I am happy to walk through any part of it —
+                    including the parts I would rewrite.
+                </p>
+                <ul class="cta-row">
+                    <li><a class="btn btn--primary" href="mailto:themtsil@gmail.com?subject=Watchario">themtsil@gmail.com</a></li>
+                    <li><a class="btn" href="https://github.com/ttsiligkoudis/Watchario" target="_blank" rel="noopener">Source</a></li>
+                    <li><a class="btn" href="./index.html">Back to my résumé</a></li>
+                </ul>
+            </footer>
+
+        </div>
+    </main>
+
+    <script src="./scripts/theme.js" defer></script>
+</body>
+</html>
