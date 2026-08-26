@@ -16,13 +16,13 @@
  */
 
 const ALLOWED_HOSTS = [
-    'eshop.myportofolio.eu',
-    'eshopapi.myportofolio.eu',
-    'library.myportofolio.eu',
-    'tools.myportofolio.eu',
-    'chat.myportofolio.eu',
     'fileservice.myportofolio.eu',
     'hangman.myportofolio.eu',
+    'sedulum.com',
+    'nomadridersgo.fly.dev',
+    // Re-add these as their deployments come back up:
+    // 'eshop.myportofolio.eu', 'eshopapi.myportofolio.eu',
+    // 'library.myportofolio.eu', 'tools.myportofolio.eu', 'chat.myportofolio.eu',
 ];
 
 const ALLOWED_ORIGINS = ['https://myportofolio.eu', 'https://www.myportofolio.eu'];
